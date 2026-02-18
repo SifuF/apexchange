@@ -45,14 +45,14 @@ public:
 
     void test();
 
-private:
-    uint64_t getId();
-    void printBook();
-
     OrderBook(const OrderBook& other) = delete;
     OrderBook(OrderBook&& other) = delete;
     OrderBook& operator=(const OrderBook& other) = delete;
     OrderBook& operator=(OrderBook&& other) = delete;
+
+private:
+    uint64_t getId();
+    void printBook();
 
     std::set<Order> buys{};
     std::set<Order> sells{};
