@@ -49,6 +49,7 @@ void OrderBook::test()
 
 void OrderBook::submitOrder(Side side, Type type, uint64_t price, uint32_t quantity, bool postOnly)
 {
+	assert(quantity > 0);
 	Order order {
 		.id = getId(),
 		.side = side,
@@ -59,6 +60,18 @@ void OrderBook::submitOrder(Side side, Type type, uint64_t price, uint32_t quant
 	};
 
 	if (order.side == Side::Buy) {
+		if (order.type == Type::Market) {
+			auto it = sells.begin();
+			uint64_t cost = 0;
+			while (order.quantity >= 0) {
+				if (order.quantity >= it->quantity) {
+                    cost += it->price * it->quantity;
+					order.quantity -= it->quantity;
+					
+				}
+				
+			}
+		}
 		buys.insert(std::move(order));
 	}
 	else if (order.side == Side::Sell) {

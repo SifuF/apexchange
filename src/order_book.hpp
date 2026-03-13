@@ -54,8 +54,8 @@ private:
     uint64_t getId();
     void printBook();
 
-    std::set<Order> buys{};
-    std::set<Order> sells{};
+    std::multiset<Order> buys{};
+    std::multiset<Order> sells{};
 };
 
 #endif // ORDER_BOOK_H
